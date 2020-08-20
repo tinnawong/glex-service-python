@@ -6,4 +6,7 @@ app.config.from_pyfile('settings.py')
 
 @app.route('/')
 def index():
-    return "Hello world : API KEY -> " + str(app.config.get("API_KEY"))
+    if(app.config.get("API_KEY")):
+        return "Hello world : API KEY -> " + str(app.config.get("API_KEY"))
+    else:
+        return "hello"
