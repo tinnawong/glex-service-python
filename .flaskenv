@@ -7,7 +7,3 @@
 # FLASK_RUN_KEY - The key file for your cert.
 
 
-FLASK_APP = demo
-FLASK_RUN_HOST = https://flask-test-env.herokuapp.com
-FLASK_ENV=development
-# FLASK_RUN_PORT=1748

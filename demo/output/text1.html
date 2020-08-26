@@ -1,0 +1,54 @@
+<!DOCTYPE html><html><head>
+        <title></title>
+        <style>
+            body {
+                margin: 20px;
+            }
+            
+            .UNKNOWN {
+                background-color: #FF1100;
+            }
+            
+            .KNOWN {
+                background-color: #00AB36;
+            }
+            
+            .AMBIGUOUS {
+                background-color: #0800FF;
+            }
+            
+            .ENGLISH {
+                background-color: #99989C;
+            }
+
+            .DIGIT {
+                background-color: #EBB326;
+            }
+            .SPECIAL {
+                background-color: #ffa50099;
+            }
+
+            .GROUP {
+                background-color: #964B00;
+            }
+            
+            .box {
+                /* border: 1px solid #000; */
+                width: 2em;
+                padding-left: 1em;
+            
+            }
+        </style>
+        </head><body>
+        
+        <div class="row" style="text-align: center;">            
+            <span class="box UNKNOWN"></span><span>คำที่ไม่รู้จัก</span>&nbsp;|&nbsp;
+            <span class="box KNOWN"></span><span>คำที่รู้จัก</span>&nbsp;|&nbsp;
+            <span class="box AMBIGUOUS"></span><span>คำกำกวม</span>&nbsp;|&nbsp;
+            <span class="box ENGLISH"></span><span>ภาษาอังกฤษ</span>&nbsp;|&nbsp;
+            <span class="box DIGIT"></span><span>ตัวเลข</span>&nbsp;|&nbsp;
+            <span class="box SPECIAL"></span><span>อักขระพิเศษ</span>&nbsp;|&nbsp;
+            <span class="box GROUP"></span><span>เครื่องหมาย</span>&nbsp;
+            <hr>
+        </div>
+        <span class="AMBIGUOUS">ทดสอบ</span><span class="KNOWN">ระบบ</span><span class="AMBIGUOUS">ของ</span><span class="SPECIAL"> </span><span class="ENGLISH">glex</span><span class="SPECIAL"> </span><span class="ENGLISH">test</span><span class="SPECIAL"> </span><span class="ENGLISH">hello</span></body></html>
