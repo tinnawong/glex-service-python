@@ -10,7 +10,7 @@ class Glex():
     def __init__(self):
         self.typeWord = {0: "UNKNOWN", 1: "KNOWN", 2: "AMBIGUOUS", 3: "ENGLISH",
                          4: "DIGIT", 5: "SPECIAL", 6: "GROUP"}
-        self.hostingGlex = str(os.environ.get("HOSTING_GLEX"))
+        self.hostingGlex = str(os.environ.get("HOSTING_GLEX_SEGMENT"))
 
     # def readFile(self.path):
     #     pass
@@ -105,18 +105,18 @@ class Glex():
             # print(">>> respones : ",json.loads(response.text))
             if(response.status_code == 200):
                 try:
-                    # print(">>> status ok : ",response)
+                    print(">>> status ok : ",response.json())
                     response = json.loads(response.text)
-
+                    # print("-->>>",response)
                     if(len(response['results']) == len(response['typeLists']) and response['status'] =="ok"):
                         results = response['results']
                         typeLists = response['typeLists']
                         formatToStruct = list(zip(response['results'], response['typeLists']))
                         try:
-                            self.creatHTML(results, typeLists,fileName)
+                            # self.creatHTML(results, typeLists,fileName)
                             return {"status": "ok","results":formatToStruct,"fileName":fileName}
 
-                        except Exception as identifier:
+                        except Exception as e:
                             return {"status": "failed","message":"can not create html file"}                   
             
                 except Exception as e:

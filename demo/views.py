@@ -4,7 +4,7 @@ from demo.glex.glex import Glex
 from flask import request,jsonify
 import os ,json
 from flask_cors import CORS
-
+import requests
 app.config.from_pyfile('settings.py')
 glex = Glex()
 CORS(app)
@@ -22,12 +22,11 @@ def index():
         data = data + "not allow"
     return data
 
-@app.route('/test',methods =['POST','GET'])
-def testPaht():
-    print("input path >> ",str(os.environ.get("PATH_INPUT")))
-    print("input path >> ",str(os.environ.get("PATH_OUTPUT")))
-    return "success"
-
+@app.route('/ping')
+def ping():
+    # print("input path >> ",str(os.environ.get("PATH_INPUT")))
+    # print("input path >> ",str(os.environ.get("PATH_OUTPUT")))
+    return jsonify({"status":"ok"})
 
 app.config['ALLOWED_EXTENSIONS'] = set(['txt'])
 
