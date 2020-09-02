@@ -92,8 +92,8 @@ class Glex():
     def connectGlexService(self,text,fileName):
 
         # send text to glex service
-        url = self.hostingGlex
-        # url = "http://127.0.0.1:8080/glexSegment"
+        # url = self.hostingGlex
+        url = "http://127.0.0.1:8080/glexSegment"
 
         # text = {"text": "เป็นการจัดกลุ่ม routes ของ request ว่า request ไหนต้องมีการ "}
         text = dict({"text": text})
@@ -109,8 +109,8 @@ class Glex():
                     response = json.loads(response.text)
                     # print("-->>>",response)
                     if(len(response['results']) == len(response['typeLists']) and response['status'] =="ok"):
-                        results = response['results']
-                        typeLists = response['typeLists']
+                        # results = response['results']
+                        # typeLists = response['typeLists']
                         formatToStruct = list(zip(response['results'], response['typeLists']))
                         try:
                             # self.creatHTML(results, typeLists,fileName)

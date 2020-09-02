@@ -3,11 +3,9 @@ from demo import app
 from demo.glex.glex import Glex
 from flask import request,jsonify
 import os ,json
-from flask_cors import CORS
 import requests
-app.config.from_pyfile('settings.py')
+
 glex = Glex()
-CORS(app)
 
 @app.route('/',methods =['POST','GET'])
 def index():
