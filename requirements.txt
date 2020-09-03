@@ -3,3 +3,4 @@ Flask
 PyInstaller
 requests
 Flask-Cors
+gevent
