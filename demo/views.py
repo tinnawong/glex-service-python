@@ -38,7 +38,7 @@ def getNameFile(filename):
     return str(name[0])
 
 @app.route('/glexSegment',methods =['POST','GET'])
-def glexControl():
+def glexSegment():
     print(">>> glex segment")
     #  # Get the name of the uploaded files
     uploaded_files = request.files.getlist("file")
@@ -52,9 +52,9 @@ def glexControl():
             if file and allowed_file(file.filename):                
                 # don't read file befor  ->> print(">>>",str(file.read().decode("utf-8")))
                 text = file.read().decode("utf-8")
-                print(">>> text send :",text)
+                print(">>> send to glex service")
                 data = glex.glexSeg(text,getNameFile(file.filename))
-                print(data)
+                print(">>> send request")
     
         return jsonify(data)
 
