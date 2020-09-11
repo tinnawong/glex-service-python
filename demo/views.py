@@ -29,7 +29,7 @@ def ping():
 app.config['ALLOWED_EXTENSIONS'] = set(['txt'])
 
 # For a given file, return whether it's an allowed type or not
-def allowed_file(filename):
+def allowedFile(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
@@ -49,7 +49,7 @@ def glexSegment():
         filenames = []
         for file in uploaded_files:
             # Check if the file is one of the allowed types/extensions
-            if file and allowed_file(file.filename):                
+            if file and allowedFile(file.filename):                
                 # don't read file befor  ->> print(">>>",str(file.read().decode("utf-8")))
                 text = file.read().decode("utf-8")
                 print(">>> send to glex service")

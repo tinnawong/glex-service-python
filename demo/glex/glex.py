@@ -34,7 +34,7 @@ class Glex():
                     if(len(response['results']) == len(response['typeLists']) and response['status'] =="ok"):
                         formatToStruct = list(zip(response['results'], response['typeLists']))
                         try:
-                            return {"status": "ok","results":formatToStruct,"fileName":fileName}
+                            return {"status": "ok","results":formatToStruct,"fileName":fileName,"dictName":response['dictName']}
 
                         except Exception as e:
                             return {"status": "failed","message":"can not create html file"}                   
