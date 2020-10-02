@@ -9,16 +9,7 @@ glex = Glex()
 
 @app.route('/',methods =['POST','GET'])
 def index():
-    # data = glexSeg("glexSeg")
-    
-    data = " -> method > "
-    if request.method == 'POST':
-        data = data + "POST"
-    elif request.method == 'GET':
-        data = data + "GET"
-    else :
-        data = data + "not allow"
-    return data
+    return jsonify({"status":"ok","title":"Main service glex"})
 
 @app.route('/ping')
 def ping():
