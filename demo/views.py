@@ -42,6 +42,7 @@ def glexSegment():
     print(">>> glex segment")
     #  # Get the name of the uploaded files
     uploaded_files = request.files.getlist("file")
+    useDict = request.form['useDict']
     if not uploaded_files or not any(f for f in uploaded_files):
         print("Empty file..")
         return jsonify({"status": "fail","message":"no file"})
@@ -53,7 +54,7 @@ def glexSegment():
                 # don't read file befor  ->> print(">>>",str(file.read().decode("utf-8")))
                 text = file.read().decode("utf-8")
                 print(">>> send to glex service")
-                data = glex.glexSeg(text,getNameFile(file.filename))
+                data = glex.glexSeg(text,getNameFile(file.filename),useDict)
                 print(">>> send request")
     
         return jsonify(data)

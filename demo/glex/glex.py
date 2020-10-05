@@ -12,14 +12,14 @@ class Glex():
         self.hostingGlex = str(os.environ.get("HOSTING_GLEX_SEGMENT"))
 
 
-    def connectGlexService(self,text,fileName):
+    def connectGlexService(self,text,fileName,useDict):
 
         # send text to glex service
         # url = self.hostingGlex
         url = "http://127.0.0.1:8080/glexSegment"
 
         # text = {"text": "เป็นการจัดกลุ่ม routes ของ request ว่า request ไหนต้องมีการ "}
-        text = dict({"text": text})
+        text = dict({"text": text,"useDict":useDict})
 
         # get respone and create html file
         try:
@@ -48,12 +48,12 @@ class Glex():
             # print(e)
             return {"status": "failed","message":"can't connect glex service"} 
 
-    def glexSeg(self,text,fileName):
+    def glexSeg(self,text,fileName,useDict):
         # read file
         # text = readFile(path)
         # print(">>> text :",text)
         # print(">>> file name :",fileName)
-        return self.connectGlexService(text,fileName)
+        return self.connectGlexService(text,fileName,useDict)
 
 
     def test(self):
