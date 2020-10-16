@@ -16,7 +16,7 @@ class Glex():
 
         # send text to glex service
         # url = self.hostingGlex
-        url = "http://127.0.0.1:8080/glexSegment"
+        url = "http://127.0.0.1:8080/glex/segment"
 
         # text = {"text": "เป็นการจัดกลุ่ม routes ของ request ว่า request ไหนต้องมีการ "}
         text = dict({"text": text,"useDict":useDict})
