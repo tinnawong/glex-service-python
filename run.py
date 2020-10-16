@@ -6,6 +6,6 @@ from flask_cors import CORS
 
 load_dotenv('.env')
 CORS(app)
-print("Start server :127.0.0.1:5200")
-http_server = WSGIServer(('127.0.0.1', 5200), app)
+print("Start server :{}:{}".format(os.environ.get("FLASK_RUN_HOST"),os.environ.get("FLASK_RUN_PORT")))
+http_server = WSGIServer((str(os.environ.get("FLASK_RUN_HOST")), int(os.environ.get("FLASK_RUN_PORT"))), app)
 http_server.serve_forever()
