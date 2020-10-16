@@ -7,15 +7,13 @@ import requests
 
 glex = Glex()
 
-@app.route('/',methods =['POST','GET'])
-def index():
-    return jsonify({"status":"ok","title":"Main service glex"})
+nlpToolsVersion = os.environ.get("NLPTOOLSVERSION")
 
-@app.route('/ping')
+@app.route('/npltools/ping')
 def ping():
     # print("input path >> ",str(os.environ.get("PATH_INPUT")))
     # print("input path >> ",str(os.environ.get("PATH_OUTPUT")))
-    return jsonify({"status":"ok"})
+    return jsonify({"status":"ok","nlpToolsVersion":nlpToolsVersion})
 
 app.config['ALLOWED_EXTENSIONS'] = set(['txt'])
 
@@ -28,7 +26,7 @@ def getNameFile(filename):
     name = filename.rsplit(".", 1)
     return str(name[0])
 
-@app.route('/glexSegment',methods =['POST','GET'])
+@app.route('/npltools/segment',methods =['POST','GET'])
 def glexSegment():
     print(">>> glex segment")
     #  # Get the name of the uploaded files
