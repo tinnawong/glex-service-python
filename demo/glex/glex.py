@@ -9,14 +9,12 @@ class Glex():
     def __init__(self):
         self.typeWord = {0: "UNKNOWN", 1: "KNOWN", 2: "AMBIGUOUS", 3: "ENGLISH",
                          4: "DIGIT", 5: "SPECIAL", 6: "GROUP"}
-        self.hostingGlex = str(os.environ.get("HOSTING_GLEX_SEGMENT"))
-
+        self.glexSegment = "http://"+str(os.environ.get("GLEX_HOST"))+":"+str(os.environ.get("GLEX_PORT"))+"/"+"glex/segment"
 
     def connectGlexService(self,text,fileName,useDict):
 
         # send text to glex service
-        # url = self.hostingGlex
-        url = "http://127.0.0.1:8080/glex/segment"
+        url = self.glexSegment
 
         # text = {"text": "เป็นการจัดกลุ่ม routes ของ request ว่า request ไหนต้องมีการ "}
         text = dict({"text": text,"useDict":useDict})
