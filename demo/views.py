@@ -58,13 +58,16 @@ def glexSegment():
 
 @app.route('/npltools/frequency', methods=['POST'])
 def frequency():
-    uploaded_files = request.files.getlist("files")
-    print(uploaded_files)
+    filesText = request.files.getlist("files")
+    print(filesText)
     print(request.form['fileType'])
     print(request.form["typeOutput"])
     print(request.form['librarySegment'])
-    print(request.form['glexDict'])
-    data = fre.frequencyWord(uploaded_files,request.form['fileType'],request.form['librarySegment'],request.form['glexDict'])
+    glexDict = ""
+    if(request.form['librarySegment'] =="glex"):        
+        glexDict = request.form['glexDict']
+
+    data = fre.frequencyWord(filesText,request.form['fileType'],request.form['librarySegment'],glexDict)
     return jsonify({"status": "ok","results":data})
 
 
