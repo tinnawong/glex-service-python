@@ -6,5 +6,6 @@ class Frequency():
     
     def frequencyWord(self,files,typeFile,librarySegment,glexDict):
         df = pd.read_json ('E:\python\glex-service-python\demo/resultDataFrame.json')
-        result = [df.to_csv(index=False),df.to_csv(index=False)]
+        # ผลลัพธ์อาจมีมากกว่า 2 ไฟล์
+        result = [("file name1",df.to_csv(index=False),df.to_csv(index=False)),("file name2",df.to_csv(index=False),df.to_csv(index=False))]
         return result
