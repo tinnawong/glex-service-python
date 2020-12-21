@@ -26,14 +26,14 @@ def getNameFile(filename):
     return str(name[0])
 
 
-@app.route('/npltools/ping')
+@app.route('/nlptools/ping')
 def ping():
     # print("input path >> ",str(os.environ.get("PATH_INPUT")))
     # print("input path >> ",str(os.environ.get("PATH_OUTPUT")))
     return jsonify({"status": "ok", "nlpToolsVersion": nlpToolsVersion})
 
 
-@app.route('/npltools/segment', methods=['POST', 'GET'])
+@app.route('/nlptools/segment', methods=['POST', 'GET'])
 def glexSegment():
     print(">>> glex segment")
     #  # Get the name of the uploaded files
@@ -56,7 +56,7 @@ def glexSegment():
         return jsonify(data)
 
 
-@app.route('/npltools/frequency', methods=['POST'])
+@app.route('/nlptools/frequency', methods=['POST'])
 def frequency():
     filesText = request.files.getlist("files")
     print(filesText)
@@ -67,7 +67,7 @@ def frequency():
     if(request.form['librarySegment'] =="glex"):        
         glexDict = request.form['glexDict']
 
-    data = fre.frequencyWord(filesText,request.form['fileType'],request.form['librarySegment'],glexDict)
+    data = fre.frequencyWord(filesText.read(),request.form['fileType'],request.form['librarySegment'],glexDict)
     return jsonify({"status": "ok","results":data})
 
 
