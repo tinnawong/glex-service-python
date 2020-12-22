@@ -5,9 +5,9 @@ from flask import request, jsonify
 import os
 import json
 import requests
-from demo.frequency import Frequency
+from demo.WordFrequency.frequency import frequencyWordExpotcsv
 glex = Glex()
-fre = Frequency()
+
 nlpToolsVersion = os.environ.get("NLPTOOLSVERSION")
 
 
@@ -64,12 +64,20 @@ def frequency():
     print(request.form["typeOutput"])
     print(request.form['librarySegment'])
     glexDict = ""
-    if(request.form['librarySegment'] =="glex"):        
+    if(request.form['librarySegment'] == "glex"):
         glexDict = request.form['glexDict']
+    tupleFile = []
+    for f in filesText:
+        tupleFile.append((f.filename,f.read().decode("utf-8")))
+    free = frequencyWordExpotcsv(TupleFile=tupleFile,
+                                 Filetype=request.form['fileType'],
+                                 LibraryNumber=request.form['librarySegment'],
+                                 selectSystem='fileandfolder',
+                                 Dictname=glexDict,
+                                 Foldername='corpus 1'
+                                 )
 
-    data = fre.frequencyWord(filesText.read(),request.form['fileType'],request.form['librarySegment'],glexDict)
-    return jsonify({"status": "ok","results":data})
-
+    return jsonify({"status": "ok", "results": free.systemfrequencyWordExpotCSV()})
 
 if __name__ == "__main__":
     # from os import environ
