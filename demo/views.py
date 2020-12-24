@@ -2,6 +2,7 @@
 from demo import app
 from demo.glex.glex import Glex
 from flask import request, jsonify
+import flask
 import os
 import json
 import requests
@@ -63,6 +64,9 @@ def frequency():
     print(request.form['fileType'])
     print(request.form["typeOutput"])
     print(request.form['librarySegment'])
+    if(len(filesText)==0):
+        flask.abort(400)
+        return "This should not be returned"
     glexDict = ""
     if(request.form['librarySegment'] == "glex"):
         glexDict = request.form['glexDict']
@@ -72,11 +76,11 @@ def frequency():
     free = frequencyWordExpotcsv(TupleFile=tupleFile,
                                  Filetype=request.form['fileType'],
                                  LibraryNumber=request.form['librarySegment'],
-                                 selectSystem='fileandfolder',
+                                 selectSystem=request.form["typeOutput"],
                                  Dictname=glexDict,
                                  Foldername='corpus 1'
                                  )
-
+    
     return jsonify({"status": "ok", "results": free.systemfrequencyWordExpotCSV()})
 
 if __name__ == "__main__":
