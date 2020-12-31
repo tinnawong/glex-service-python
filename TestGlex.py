@@ -1,7 +1,7 @@
 import unittest
-from demo.glex.glex import Glex
-from demo import app
-from demo import views
+from app.glex.glex import Glex
+from app import app
+from app import routes
 from flask import request, jsonify
 import json
 import codecs
@@ -13,12 +13,12 @@ class TestGlex(unittest.TestCase):
 
     # test method in service
     def test_viewsAllowed(self):
-        self.assertTrue(views.allowedFile("tesxt.txt"))
-        self.assertFalse(views.allowedFile("tesxt.doc"))
+        self.assertTrue(routes.allowedFile("tesxt.txt"))
+        self.assertFalse(routes.allowedFile("tesxt.doc"))
 
     def test_viewsGetNameFile(self):
-        self.assertEqual(views.getNameFile("test-2 3.txt"), "test-2 3")
-        self.assertEqual(views.getNameFile("test-2/*. 3.txt"), "test-2/*. 3")
+        self.assertEqual(routes.getNameFile("test-2 3.txt"), "test-2 3")
+        self.assertEqual(routes.getNameFile("test-2/*. 3.txt"), "test-2/*. 3")
 
     # test service
     def test_connectGlexService(self):
