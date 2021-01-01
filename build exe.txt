@@ -1,5 +1,0 @@
-pyinstaller --onefile --hidden-import=flask --hidden-import=python-dotenv --hidden-import=requests --hidden-import=Flask-Cors --add-data ".env;.env" --add-data "./demo;./demo" --add-data ".flaskenv;.flaskenv"  -D -y run.py
-
-
-
-pyinstaller --onefile --hidden-import=flask --hidden-import=python-dotenv --hidden-import=requests --hidden-import=Flask-Cors --add-data "./.env;./" --add-data "./demo;./demo" --add-data ".flaskenv;./"  -D -y run.py
