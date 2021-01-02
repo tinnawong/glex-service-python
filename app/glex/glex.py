@@ -18,7 +18,6 @@ class Glex():
         # get respone and create html file
         try:
             response = requests.get(self.urlGlexSegment, params=params)
-            # print(">>> respones : ",json.loads(response.text))
             if(response.status_code == 200):
                 try:
                     response = json.loads(response.text)
@@ -26,24 +25,18 @@ class Glex():
                         formatToStruct = list(zip(response['results'], response['typeLists']))
                         return {"status": "ok","results":formatToStruct,"fileName":fileName,"dictName":response['dictName']}              
                 except Exception as e:
-                    # print(e)
                     return {"status": "failed","message":"can not format json from glex service "}
             else:
                 return {"status": "failed","message":"can't connect glex service(status code :{})".format(response.status_code)} 
         except Exception as e:
-            # print(e)
             return {"status": "failed","message":"can't connect glex service"} 
 
     def glexSeg(self,text,fileName,useDict):
         return self.connectGlexService(text,fileName,useDict)
-
 
     def test(self):
         return {"status": "OK"}
 
 
 if __name__ == "__main__":
-    # from glex import glexSeg
-    # glexSeg(self, text,fileName):
-
     pass

@@ -11,8 +11,7 @@ from pythainlp import word_tokenize
 import csv
 import time
 
-class frequencyWordExpotcsv():
-
+class FrequencyWord():
 
     def __init__(self,TupleFile=None,Filetype=None,LibraryNumber=None,selectSystem=None,Dictname=None,Foldername=None):
         
@@ -24,8 +23,6 @@ class frequencyWordExpotcsv():
         self.Foldername = Foldername
         self.TextListFolder = []
         self.resultData = []
-
-    
 
     def setText(self,TextFile):
         
@@ -86,18 +83,15 @@ class frequencyWordExpotcsv():
         return WordsRepeat
 
     def exportCSV(self,Words,uniqueWords,WordsRepeat,NameFile):
-        
-        DataSummary = {
-            'จำนวนคำทั้งหมด':Words,
-            'จำนวนคำที่ไม่ซ้ำทั้งหมด':uniqueWords,
+        Datalog = {
             'ระบบในการตัดคำ':self.LibraryNumber,
             'เวลา':time.strftime('%d-%m-%Y %H:%M:%S')}
 
         DataFrequencyCSV = pd.DataFrame(WordsRepeat.most_common(), columns=['รายการคำ','ความถี่ของคำ'])
-        DataSummaryCSV = pd.DataFrame({key:pd.Series(value) for key, value in DataSummary.items()})
-        resultDataSummaryCSV = DataSummaryCSV.to_csv(index=False,encoding='utf-8-sig')
+        DatalogCSV = pd.DataFrame({key:pd.Series(value) for key, value in Datalog.items()})
+        resultDatalogCSV = DatalogCSV.to_csv(index=False,encoding='utf-8-sig')
         resultDataFrequencyCSV = DataFrequencyCSV.to_csv(index=False,encoding='utf-8-sig')
-        return ('(สรุปจำนวนคำ)'+NameFile,resultDataFrequencyCSV),('(ความถี่คำ)'+NameFile,resultDataSummaryCSV)
+        return (NameFile+'(ความถี่คำ)',resultDataFrequencyCSV),('cospus_'+NameFile+'_log',resultDatalogCSV)#จะมีไฟล์เดียว
     
     def frequencyWordExpotCSVFile(self):
         for NameFile,TextFile in self.TupleFile:
@@ -106,12 +100,14 @@ class frequencyWordExpotcsv():
             Words = self.lenWords(cutWords)
             WordsRepeat = self.repeatWords(cutWords)
             uniqueWords = self.getUniqueWords(cutWords)
-            resultDataFrequencyCSV, resultDataSummaryCSV = self.exportCSV(Words,uniqueWords,WordsRepeat,NameFile)
+            resultDataFrequencyCSV, resultDatalogCSV = self.exportCSV(Words,uniqueWords,WordsRepeat,NameFile)
             self.resultData.append(resultDataFrequencyCSV)
-            self.resultData.append(resultDataSummaryCSV)
+        if(self.selectSystem=='file'):
+            NameFile = self.Foldername
+            resultDataFrequencyCSV, resultDatalogCSV = self.exportCSV(Words,uniqueWords,WordsRepeat,NameFile)
+            self.resultData.append(resultDatalogCSV)
 
     def frequencyWordExpotCSVFolder(self):
-        
         for NameFile,TextFile in self.TupleFile:
             TextList,self.TextListFolder = self.setText(TextFile)
         cutWords = self.selectLibraryFolder()
@@ -119,12 +115,10 @@ class frequencyWordExpotcsv():
         WordsRepeat = self.repeatWords(cutWords)
         uniqueWords = self.getUniqueWords(cutWords)
         NameFile = self.Foldername
-        resultDataFrequencyCSV, resultDataSummaryCSV = self.exportCSV(Words,uniqueWords,WordsRepeat,NameFile)
+        resultDataFrequencyCSV, resultDatalogCSV = self.exportCSV(Words,uniqueWords,WordsRepeat,NameFile)
         self.resultData.append(resultDataFrequencyCSV)
-        self.resultData.append(resultDataSummaryCSV)
+        self.resultData.append(resultDatalogCSV)
         
-    
-
     def systemfrequencyWordExpotCSV(self):
         if(self.selectSystem == 'fileandfolder'):
             self.frequencyWordExpotCSVFolder()

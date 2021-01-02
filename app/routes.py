@@ -6,7 +6,7 @@ import flask
 import os
 import json
 import requests
-from app.WordFrequency.frequency import frequencyWordExpotcsv
+from app.WordFrequency.frequency import FrequencyWord
 
 glex = Glex()
 
@@ -37,11 +37,10 @@ def glexSegment():
         for file in fileUpload:
             # Check if the file is one of the allowed types/extensions
             if file and allowedFile(file.filename):
-                # don't read file befor  ->> print(">>>",str(file.read().decode("utf-8")))
                 text = file.read().decode("utf-8")
                 data = glex.glexSeg(text, getNameFile(file.filename), useDict)
 
-        return jsonify(data)
+        return jsonify({"status": "ok", "result": data})
 
 @app.route('/nlptools/frequency', methods=['POST'])
 def frequency():
@@ -58,15 +57,18 @@ def frequency():
     tupleFile = []
     for f in filesText:
         tupleFile.append((f.filename,f.read().decode("utf-8")))
-    frequency = frequencyWordExpotcsv(TupleFile=tupleFile,
+    frequency = FrequencyWord(TupleFile=tupleFile,
                                  Filetype=request.form['fileType'],
                                  LibraryNumber=request.form['librarySegment'],
                                  selectSystem=request.form["typeOutput"],
                                  Dictname=glexDict,
                                  Foldername=request.form["corpusName"],
                                  )
-    
-    return jsonify({"status": "ok", "results": frequency.systemfrequencyWordExpotCSV()})
+    result = frequency.systemfrequencyWordExpotCSV()
+    if result ==[]:
+        return jsonify({"status": "fail", "message": "no output file"})
+    else:
+        return jsonify({"status": "ok", "results":result })
 
 if __name__ == "__main__":
     pass
